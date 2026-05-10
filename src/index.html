@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>Live Stream - Gift Shop Counter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+</head>
+<body>
+    <div class="phone" id="phoneContainer">
+        <div class="app-screen">
+            <!-- Home Screen -->
+            <div id="homeScreen">
+                <div class="status-bar">
+                    <span class="time">9:41</span>
+                    <div>📶 🔋</div>
+                </div>
+                <div class="main-header">
+                    <div class="title-area">
+                        <span class="app-name">Live Stream App</span>
+                        <span class="badge">LIVE</span>
+                    </div>
+                    <div class="header-actions">
+                        <button class="icon-btn inbox-header-btn" id="inboxHeaderBtn" aria-label="Inbox">✉️</button>
+                        <button class="icon-btn profile-header-btn" id="profileHeaderBtn" aria-label="Profile">👤</button>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <div class="filter-row">
+                        <button class="filter-dropdown-btn small-filter" id="sortDropdownBtn" aria-label="Sort by">
+                            <span>📋</span> All <span class="arrow">▼</span>
+                        </button>
+                        <button class="filter-dropdown-btn small-filter" id="filterDropdownBtn" aria-label="Filter by country">
+                            <span>🌍</span> Country <span class="arrow">▼</span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menus">
+                        <div class="dropdown-menu hidden" id="sortDropdownMenu">
+                            <button class="dropdown-item active" data-sort="all">📋 All</button>
+                            <button class="dropdown-item" data-sort="new">🆕 New</button>
+                            <button class="dropdown-item" data-sort="favorites">⭐ Favorites</button>
+                        </div>
+                        <div class="countries-grid hidden" id="countriesGrid"></div>
+                    </div>
+                </div>
+                <div class="streamers-section">
+                    <div class="streamer-grid" id="streamerGrid"></div>
+                </div>
+            </div>
+
+            <!-- Bag Screen -->
+            <div id="bagScreen" class="bag-screen hidden">
+                <div class="bag-header">
+                    <button class="back-btn" id="backBtn" aria-label="Back">← Back</button>
+                    <h2>My Bag</h2>
+                    <div style="width:60px;"></div>
+                </div>
+                <div class="bag-total">
+                    <span>💎 My Gems:</span>
+                    <span class="total-amount" id="totalAmount">0</span>
+                </div>
+                <div class="bag-section-title">📦 Owned Gifts</div>
+                <div class="bag-items-container" id="bagItemsContainer"></div>
+            </div>
+
+            <!-- Exchange Screen -->
+            <div id="exchangeScreen" class="exchange-screen hidden">
+                <div class="bag-header">
+                    <button class="exchange-back-btn back-btn">← Back</button>
+                    <h2>💎 Exchange</h2>
+                    <div>💎 <span id="exchangeGemCount">0</span></div>
+                </div>
+                <div class="gems-shop" id="gemsShopContainer"></div>
+            </div>
+
+            <!-- Gift Shop Screen -->
+            <div id="giftShopScreen" class="gift-shop-screen hidden">
+                <div class="bag-header">
+                    <button class="gift-shop-back-btn back-btn">← Back</button>
+                    <h2>Gift Shop</h2>
+                    <button class="icon-btn bag-icon-btn" id="bagIconBtn" aria-label="Bag">👜</button>
+                </div>
+                <div class="gem-display-header">💎 <span id="currentGems">0</span> gems</div>
+                <div class="gift-category-filter" id="giftCategoryFilter">
+                    <button class="cat-btn active" data-cat="all">All</button>
+                    <button class="cat-btn" data-cat="food">🍕 Food</button>
+                    <button class="cat-btn" data-cat="fantasy">🦄 Fantasy</button>
+                    <button class="cat-btn" data-cat="vehicles">🚗 Vehicles</button>
+                    <button class="cat-btn" data-cat="love">💝 Love</button>
+                    <button class="cat-btn" data-cat="luxury">💎 Luxury</button>
+                    <button class="cat-btn" data-cat="fun">🎉 Fun</button>
+                </div>
+                <div class="gift-shop-grid" id="giftShopGrid"></div>
+            </div>
+
+            <!-- Achievements Screen -->
+            <div id="achievementsScreen" class="achievements-screen hidden">
+                <div class="bag-header">
+                    <button class="achievements-back-btn back-btn">← Back</button>
+                    <h2>🏆 Achievements</h2>
+                    <div style="width:40px;"></div>
+                </div>
+                <div class="achievements-grid" id="achievementsGrid"></div>
+            </div>
+
+            <!-- Profile Screen -->
+            <div id="profileScreen" class="profile-screen hidden">
+                <div class="bag-header">
+                    <button class="profile-back-btn back-btn">← Back</button>
+                    <h2>My Profile</h2>
+                    <div class="header-actions">
+                        <button class="icon-btn friends-list-btn" id="friendsListBtn" aria-label="Friends List">👥</button>
+                        <button class="icon-btn favorites-list-btn" id="favoritesListBtn" aria-label="Favorites List">⭐</button>
+                    </div>
+                </div>
+                <div id="profileContent"></div>
+            </div>
+
+            <!-- Friends List Screen -->
+            <div id="friendsScreen" class="friends-screen hidden">
+                <div class="bag-header">
+                    <button class="friends-back-btn back-btn">← Back</button>
+                    <h2>👥 Friends</h2>
+                    <div style="width:40px;"></div>
+                </div>
+                <div class="friends-container" id="friendsContainer"></div>
+            </div>
+
+            <!-- Favorites List Screen -->
+            <div id="favoritesListScreen" class="favorites-list-screen hidden">
+                <div class="bag-header">
+                    <button class="favorites-list-back-btn back-btn">← Back</button>
+                    <h2>⭐ Favorites</h2>
+                    <div style="width:40px;"></div>
+                </div>
+                <div class="favorites-container" id="favoritesListContainer"></div>
+            </div>
+
+            <!-- Inbox Screen (Messages) -->
+            <div id="inboxScreen" class="inbox-screen hidden">
+                <div class="bag-header">
+                    <button class="inbox-back-btn back-btn" id="inboxBackBtn">← Back</button>
+                    <h2>✉️ Messages</h2>
+                    <div style="width:40px;"></div>
+                </div>
+                <div class="inbox-conversations" id="inboxConversations"></div>
+                <div class="inbox-chat-view hidden" id="inboxChatView">
+                    <div class="chat-header">
+                        <button class="chat-back-btn back-btn-small">←</button>
+                        <span class="chat-friend-name" id="chatFriendName">Friend</span>
+                        <div style="width:32px;"></div>
+                    </div>
+                    <div class="chat-messages-list" id="chatMessagesList"></div>
+                    <div class="chat-input-area">
+                        <input type="text" class="chat-input-field" id="privateChatInput" placeholder="Message...">
+                        <button class="chat-send-msg-btn" id="chatSendMsgBtn">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Streamer Screen -->
+            <div id="streamerScreen" class="streamer-screen hidden">
+                <div class="video-feed-placeholder">
+                    <div class="streamer-avatar-large" id="streamerAvatarLarge">🎥</div>
+                    <div class="streamer-status-text">🔴 LIVE NOW</div>
+                    <div class="streamer-viewer-count">👁️ 1.2k watching</div>
+                </div>
+                <div class="streamer-top-bar">
+                    <div class="streamer-top-left">
+                        <button class="streamer-back-btn icon-btn" id="streamerBackBtn" aria-label="Back">←</button>
+                        <div class="streamer-stats-top">
+                            <span>❤️ 4.5k</span>
+                            <span>⭐ 892</span>
+                        </div>
+                    </div>
+                    <button class="streamer-name-tag" id="streamerNameTagBtn">StreamerName</button>
+                    <button class="favorite-star-btn" id="favoriteStarBtn" aria-label="Favorite">☆</button>
+                </div>
+                <div class="chat-overlay">
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="Send a message...">
+                        <button class="chat-send-btn" id="chatSendBtn" aria-label="Send">Send</button>
+                        <button class="chat-gift-btn" id="chatGiftBtn" aria-label="Send Gift">🎁</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other User Profile Screen (View other streamer/user profile) -->
+            <div id="otherUserProfileScreen" class="other-user-profile-screen hidden">
+                <div class="bag-header">
+                    <button class="other-profile-back-btn back-btn">← Back</button>
+                    <h2 id="otherProfileUsername">User Profile</h2>
+                    <button class="friend-action-btn" id="friendRequestActionBtn">➕ Add Friend</button>
+                </div>
+                <div id="otherProfileContent"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav" id="bottomNav">
+            <div class="nav-item active" id="homeNavBtn"><span class="nav-icon">🏠</span><span>Home</span></div>
+            <div class="nav-item" id="bagNavBtn"><span class="nav-icon">👜</span><span>Bag</span><span class="bag-count-badge" id="bagCountBadge">0</span></div>
+            <div class="nav-item" id="exchangeNavBtn"><span class="nav-icon">💱</span><span>Exchange</span></div>
+            <div class="nav-item" id="giftShopNavBtn"><span class="nav-icon">🎁</span><span>Gifts</span></div>
+            <div class="nav-item" id="achievementsNavBtn"><span class="nav-icon">🏆</span><span>Achievements</span></div>
+        </div>
+    </div>
+
+    <!-- Gift Modal -->
+    <div id="giftModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header"><h3 id="modalStreamerName">Send Gift</h3><button class="modal-close" id="modalCloseBtn">&times;</button></div>
+            <div class="modal-body" id="modalGiftList"></div>
+            <div class="modal-quick-actions">
+                <button class="quick-action-btn" id="modalExchangeBtn">💎 Exchange</button>
+                <button class="quick-action-btn" id="modalGiftShopBtn">🎁 Gift Shop</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Menu for Friends -->
+    <div id="contextMenu" class="context-menu hidden">
+        <button class="context-menu-btn remove-friend-context-btn">🗑️ Remove Friend</button>
+        <button class="context-menu-btn cancel-context-btn">Cancel</button>
+    </div>
+
+    <div class="popup-notification" style="display: none;"></div>
+    <script src="script.js"></script>
+</body>
+</html>
